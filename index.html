@@ -15,7 +15,7 @@
         <!--===== HEADER =====-->
         <header class="l-header">
             <nav class="nav bd-grid">
-                <div>
+                <div class="nav__logo-container">
                     <a href="#" class="nav__logo">Ginindu Karunadhipathi</a>
                 </div>
 
@@ -27,6 +27,24 @@
                         <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
                         <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                     </ul>
+                </div>
+
+                <div class="nav__right">
+                    <div class="nav__search">
+                        <input type="text" placeholder="Search..." class="search__input" id="search-input">
+                        <i class='bx bx-search search__icon' id="search-icon"></i>
+                    </div>
+
+                    <div class="nav__theme">
+                        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                            <i class='bx bx-moon theme-icon' id="theme-icon"></i>
+                        </button>
+                    </div>
+
+                    <div class="nav__auth">
+                        <a href="login.html" class="nav__auth-link nav__auth-login">Login</a>
+                        <a href="signup.html" class="nav__auth-link nav__auth-signup">Sign Up</a>
+                    </div>
                 </div>
 
                 <div class="nav__toggle" id="nav-toggle">
@@ -192,13 +210,48 @@
 
         <!--===== FOOTER =====-->
         <footer class="footer">
-            <p class="footer__title">Ginindu</p>
-            <div class="footer__social">
-                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+            <div class="footer__container bd-grid">
+                <div class="footer__content">
+                    <p class="footer__title">Ginindu Karunadhipathi</p>
+                    <p class="footer__subtitle">Data Science Enthusiast | Web Developer | Tech Innovator</p>
+                </div>
+
+                <div class="footer__social">
+                    <h3 class="footer__section-title">Follow Me</h3>
+                    <div class="footer__links">
+                        <a href="https://www.linkedin.com/in/ginindu-karunadhipathi/" target="_blank" class="footer__icon" title="LinkedIn">
+                            <i class='bx bxl-linkedin'></i>
+                        </a>
+                        <a href="https://github.com/Ginindu" target="_blank" class="footer__icon" title="GitHub">
+                            <i class='bx bxl-github'></i>
+                        </a>
+                        <a href="https://www.behance.net/ginindukarunadhipathi" target="_blank" class="footer__icon" title="Behance">
+                            <i class='bx bxl-behance'></i>
+                        </a>
+                        <a href="#" class="footer__icon" title="Facebook">
+                            <i class='bx bxl-facebook'></i>
+                        </a>
+                        <a href="#" class="footer__icon" title="Instagram">
+                            <i class='bx bxl-instagram'></i>
+                        </a>
+                        <a href="#" class="footer__icon" title="Twitter">
+                            <i class='bx bxl-twitter'></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__actions">
+                    <h3 class="footer__section-title">Get In Touch</h3>
+                    <div class="footer__buttons">
+                        <a href="#contact" class="button footer__button footer__button--primary">Contact Us</a>
+                        <a href="signup.html" class="button footer__button footer__button--secondary">Join Us</a>
+                    </div>
+                </div>
             </div>
-            <p class="footer__copy">&#169; Ginindu. All rigths reserved</p>
+
+            <div class="footer__bottom">
+                <p class="footer__copy">&#169; 2026 Ginindu. All rights reserved</p>
+            </div>
         </footer>
 
 

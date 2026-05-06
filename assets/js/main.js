@@ -54,4 +54,73 @@ const sr = ScrollReveal({
 sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
 sr.reveal('.home__social-icon',{ interval: 200}); 
-sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200});
+
+/*===== THEME TOGGLE =====*/
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const body = document.body;
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem('theme') || 'light';
+body.setAttribute('data-theme', currentTheme);
+updateThemeIcon(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+});
+
+function updateThemeIcon(theme) {
+    if (theme === 'dark') {
+        themeIcon.className = 'bx bx-sun theme-icon';
+    } else {
+        themeIcon.className = 'bx bx-moon theme-icon';
+    }
+}
+
+/*===== SEARCH EXPAND/COLLAPSE =====*/
+const searchContainer = document.querySelector('.nav__search');
+const searchInput = document.getElementById('search-input');
+const searchIcon = document.getElementById('search-icon');
+
+if (searchIcon && searchInput) {
+    // Click icon to expand/collapse search
+    searchIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchContainer.classList.toggle('active');
+        if (searchContainer.classList.contains('active')) {
+            searchInput.focus();
+        }
+    });
+
+    // Close search when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchContainer.contains(e.target)) {
+            searchContainer.classList.remove('active');
+        }
+    });
+
+    // Allow Enter key to submit search
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const query = searchInput.value;
+            if (query.trim()) {
+                console.log('Search for:', query);
+                // Add your search functionality here
+            }
+        }
+    });
+
+    // Close search on Escape key
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            searchContainer.classList.remove('active');
+            searchInput.value = '';
+        }
+    });
+} 

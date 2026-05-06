@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/auth.css">
+
+        <!-- =====BOX ICONS===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <title>Login - Portfolio</title>
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div class="nav__logo-container">
+                    <a href="index.html" class="nav__logo">Ginindu Karunadhipathi</a>
+                </div>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="index.html#skills" class="nav__link">Skills</a></li>
+                        <li class="nav__item"><a href="index.html#work" class="nav__link">Work</a></li>
+                        <li class="nav__item"><a href="index.html#contact" class="nav__link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__right">
+                    <div class="nav__theme">
+                        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                            <i class='bx bx-moon theme-icon' id="theme-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="auth-main">
+            <div class="auth__container">
+                <div class="auth__card">
+                    <div class="auth__header">
+                        <h1 class="auth__title">Welcome Back</h1>
+                        <p class="auth__subtitle">Sign in to your account</p>
+                    </div>
+
+                    <form class="auth__form" id="login-form">
+                        <div class="form-group">
+                            <label for="email" class="form__label">Email Address</label>
+                            <div class="form__input-group">
+                                <i class='bx bx-envelope form__icon'></i>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    class="form__input" 
+                                    placeholder="your.email@example.com"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form__label">Password</label>
+                            <div class="form__input-group">
+                                <i class='bx bx-lock-alt form__icon'></i>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    class="form__input" 
+                                    placeholder="Enter your password"
+                                    required
+                                >
+                                <button type="button" class="password-toggle" id="password-toggle">
+                                    <i class='bx bx-hide form__icon'></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group--row">
+                            <label class="form__checkbox">
+                                <input type="checkbox" class="form__checkbox-input">
+                                <span class="form__checkbox-label">Remember me</span>
+                            </label>
+                            <a href="#" class="form__link">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="button auth__button">Sign In</button>
+                    </form>
+
+                    <div class="auth__divider">
+                        <span>or</span>
+                    </div>
+
+                    <div class="auth__social">
+                        <button type="button" class="social-button" title="Login with Google">
+                            <i class='bx bxl-google'></i>
+                            <span>Google</span>
+                        </button>
+                        <button type="button" class="social-button" title="Login with GitHub">
+                            <i class='bx bxl-github'></i>
+                            <span>GitHub</span>
+                        </button>
+                    </div>
+
+                    <div class="auth__footer">
+                        <p>Don't have an account? <a href="signup.html" class="form__link">Sign up here</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <div class="footer__container bd-grid">
+                <div class="footer__content">
+                    <p class="footer__title">Ginindu Karunadhipathi</p>
+                    <p class="footer__subtitle">Data Science Enthusiast | Web Developer | Tech Innovator</p>
+                </div>
+
+                <div class="footer__social">
+                    <h3 class="footer__section-title">Follow Me</h3>
+                    <div class="footer__links">
+                        <a href="https://www.linkedin.com/in/ginindu-karunadhipathi/" target="_blank" class="footer__icon" title="LinkedIn">
+                            <i class='bx bxl-linkedin'></i>
+                        </a>
+                        <a href="https://github.com/Ginindu" target="_blank" class="footer__icon" title="GitHub">
+                            <i class='bx bxl-github'></i>
+                        </a>
+                        <a href="https://www.behance.net/ginindukarunadhipathi" target="_blank" class="footer__icon" title="Behance">
+                            <i class='bx bxl-behance'></i>
+                        </a>
+                        <a href="#" class="footer__icon" title="Facebook">
+                            <i class='bx bxl-facebook'></i>
+                        </a>
+                        <a href="#" class="footer__icon" title="Instagram">
+                            <i class='bx bxl-instagram'></i>
+                        </a>
+                        <a href="#" class="footer__icon" title="Twitter">
+                            <i class='bx bxl-twitter'></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__actions">
+                    <h3 class="footer__section-title">Get In Touch</h3>
+                    <div class="footer__buttons">
+                        <a href="index.html#contact" class="button footer__button footer__button--primary">Contact Us</a>
+                        <a href="index.html" class="button footer__button footer__button--secondary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copy">&#169; 2026 Ginindu. All rights reserved</p>
+            </div>
+        </footer>
+
+        <!--===== MAIN JS =====-->
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/auth.js"></script>
+    </body>
+</html>
