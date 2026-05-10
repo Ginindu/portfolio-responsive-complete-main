@@ -43,6 +43,14 @@
   --border-color: rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="dark"] .home__social-icon {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .footer__icon {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 @media screen and (min-width: 968px) {
   :root {
     --big-font-size: 3.5rem;
@@ -369,7 +377,7 @@ img {
   width: max-content;
   margin-bottom: var(--mb-2);
   font-size: 1.5rem;
-  color: var(--second-color);
+  color: var(--text-color);
 }
 .home__social-icon:hover {
   color: var(--first-color);
