@@ -200,6 +200,22 @@ img {
   align-items: center;
 }
 
+.nav__logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav__logo-img {
+  height: 2.5rem;
+  width: auto;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.nav__logo:hover .nav__logo-img {
+  transform: scale(1.1);
+}
+
 .nav__right {
   display: flex;
   align-items: center;
