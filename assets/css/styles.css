@@ -55,6 +55,10 @@
   filter: brightness(1.2);
 }
 
+[data-theme="dark"] .tech-item {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 @media screen and (min-width: 968px) {
   :root {
     --big-font-size: 3.5rem;
@@ -561,33 +565,37 @@ img {
 /* ===== TECH STACK =====*/
 .tech-stack__container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
   justify-items: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .tech-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-color);
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .tech-item:hover {
+  border-color: var(--first-color);
+  color: var(--first-color);
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
-  background-color: var(--section-bg);
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
 }
 
 .tech-logo {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 0.5rem;
+  width: 30px;
+  height: 30px;
   filter: grayscale(0%);
   transition: filter 0.3s ease;
 }
@@ -597,14 +605,7 @@ img {
 }
 
 .tech-name {
-  font-size: var(--smaller-font-size);
-  font-weight: var(--font-semi);
-  color: var(--text-color);
-  transition: color 0.3s ease;
-}
-
-.tech-item:hover .tech-name {
-  color: var(--first-color);
+  display: none; /* Hide the name to make it like footer icons */
 }
 
 /* ===== WORK =====*/
@@ -856,6 +857,23 @@ img {
   .footer__button {
     width: 100%;
     padding: 0.6rem 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tech-stack__container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+
+  .tech-item {
+    width: 45px;
+    height: 45px;
+  }
+
+  .tech-logo {
+    width: 25px;
+    height: 25px;
   }
 }
 
