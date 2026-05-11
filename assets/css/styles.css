@@ -629,9 +629,18 @@ img {
   display: flex;
   gap: 1rem;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
   padding-bottom: 0.5rem;
+  width: 100%;
+  scroll-padding: 1rem;
+  cursor: grab;
+}
+
+.about__banner-slider:active {
+  cursor: grabbing;
 }
 
 .about__banner-slider::-webkit-scrollbar {
@@ -639,8 +648,8 @@ img {
 }
 
 .about__banner {
-  flex: 0 0 min(320px, 90%);
-  min-width: 320px;
+  flex: 0 0 100%;
+  min-width: 100%;
   scroll-snap-align: start;
   position: relative;
 }
