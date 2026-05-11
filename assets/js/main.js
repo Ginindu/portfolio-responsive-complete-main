@@ -124,4 +124,51 @@ if (searchIcon && searchInput) {
             searchInput.value = '';
         }
     });
-} 
+}
+
+/*===== ABOUT SLIDER DRAG =====*/
+const bannerSlider = document.querySelector('.about__banner-slider');
+if (bannerSlider) {
+  let isDragging = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  bannerSlider.addEventListener('pointerdown', (e) => {
+    isDragging = true;
+    bannerSlider.setPointerCapture(e.pointerId);
+    bannerSlider.classList.add('active');
+    startX = e.clientX;
+    scrollLeft = bannerSlider.scrollLeft;
+  });
+
+  bannerSlider.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const x = e.clientX;
+    const walk = x - startX;
+    bannerSlider.scrollLeft = scrollLeft - walk;
+  });
+
+  const stopDragging = () => {
+    isDragging = false;
+    bannerSlider.classList.remove('active');
+  };
+
+  bannerSlider.addEventListener('pointerup', stopDragging);
+  bannerSlider.addEventListener('pointercancel', stopDragging);
+  bannerSlider.addEventListener('pointerleave', stopDragging);
+
+  const banners = document.querySelectorAll('.about__banner');
+  if (banners.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    banners.forEach((banner) => observer.observe(banner));
+  }
+}
+
