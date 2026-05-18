@@ -57,6 +57,22 @@ sr.reveal('.home__social-icon',{ interval: 200});
 sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200});
 sr.reveal('.tech-item',{interval: 200});
 
+/*===== ABOUT IMAGE REVEAL =====*/
+const aboutImageWrap = document.querySelector('.about__image-wrap');
+if (aboutImageWrap) {
+    const aboutObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                aboutObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    aboutObserver.observe(aboutImageWrap);
+}
+
+
 /*===== THEME TOGGLE =====*/
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
