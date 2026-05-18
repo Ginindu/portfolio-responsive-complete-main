@@ -35,6 +35,7 @@
                 <div class="nav__search">
                     <input type="text" placeholder="Search..." class="search__input" id="search-input">
                     <i class='bx bx-search search__icon' id="search-icon"></i>
+                    <div class="search__results" id="search-results"></div>
                 </div>
 
                 <div class="nav__theme">
@@ -60,8 +61,7 @@
         <section class="home bd-grid" id="home">
             <div class="home__data">
                 <h1 class="home__title">Hi,<br>I'am <span class="home__title-color">Ginindu</span><br> Data Science
-                    <br>Undergraduate
-                </h1>
+                    <br>Undergraduate</h1>
 
                 <a href="#" class="button">Contact</a>
             </div>
@@ -298,9 +298,42 @@
                     <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
                     <input type="button" value="Send Message" class="contact__button button">
                 </form>
+
+                </div>
             </div>
         </section>
     </main>
+
+    <!--===== CHATBOT WIDGET =====-->
+    <div class="chatbot-widget">
+        <div class="chatbot__wrapper" id="chatbot-wrapper">
+            <div class="chatbot__header">
+                <div class="chatbot__header-title">
+                    <i class='bx bx-bot chatbot__icon'></i>
+                    <span class="chatbot__title">Portfolio Assistant</span>
+                </div>
+                <button class="chatbot__close" id="chatbot-close"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="chatbot__box" id="chatbot-box">
+                <div class="chatbot__message chatbot__message--bot">
+                    <p>Hi there! I'm Ginindu's virtual assistant. Would you like to know more about his portfolio?</p>
+                </div>
+                <div class="chatbot__options">
+                    <button class="chatbot__option-btn" data-question="skills">What are his main skills?</button>
+                    <button class="chatbot__option-btn" data-question="experience">Tell me about his experience.</button>
+                    <button class="chatbot__option-btn" data-question="hire">How can I hire him?</button>
+                </div>
+            </div>
+            <div class="chatbot__input-area">
+                <input type="text" id="chatbot-input" placeholder="Type a message..." class="chatbot__input">
+                <button id="chatbot-send" class="chatbot__send"><i class='bx bx-send'></i></button>
+            </div>
+        </div>
+        <button class="chatbot__toggle" id="chatbot-toggle">
+            <i class='bx bx-message-rounded-dots'></i>
+        </button>
+    </div>
+
 
     <!--===== FOOTER =====-->
     <footer class="footer">

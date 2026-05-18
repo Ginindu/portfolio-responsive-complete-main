@@ -84,44 +84,164 @@ function updateThemeIcon(theme) {
     }
 }
 
-/*===== SEARCH EXPAND/COLLAPSE =====*/
+/*===== SEARCH & HIGHLIGHT =====*/
 const searchContainer = document.querySelector('.nav__search');
 const searchInput = document.getElementById('search-input');
 const searchIcon = document.getElementById('search-icon');
+const searchResults = document.getElementById('search-results');
 
-if (searchIcon && searchInput) {
-    // Click icon to expand/collapse search
+const searchableKeywords = [
+    { term: "Data Science", target: "home" },
+    { term: "Web Developer", target: "about" },
+    { term: "Skills", target: "skills" },
+    { term: "HTML5", target: "skills" },
+    { term: "CSS3", target: "skills" },
+    { term: "JavaScript", target: "skills" },
+    { term: "Python", target: "skills" },
+    { term: "Work", target: "work" },
+    { term: "Contact", target: "contact" },
+    { term: "Portfolio", target: "home" },
+    { term: "Experience", target: "about" }
+];
+
+function unhighlightAll() {
+    const highlights = document.querySelectorAll('.highlight');
+    highlights.forEach(h => {
+        const parent = h.parentNode;
+        parent.replaceChild(document.createTextNode(h.textContent), h);
+        parent.normalize();
+    });
+}
+
+function highlightText(element, keyword) {
+    if (!keyword) return;
+    
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+    const nodesToHighlight = [];
+    let node;
+    
+    while (node = walker.nextNode()) {
+        if (node.parentElement.tagName.toLowerCase() === 'script' || 
+            node.parentElement.tagName.toLowerCase() === 'style' ||
+            node.parentElement.classList.contains('highlight')) {
+            continue;
+        }
+        
+        if (node.nodeValue.toLowerCase().includes(keyword.toLowerCase())) {
+            nodesToHighlight.push(node);
+        }
+    }
+    
+    nodesToHighlight.forEach(node => {
+        const regex = new RegExp(`(${keyword})`, 'gi');
+        const fragment = document.createDocumentFragment();
+        
+        let lastIndex = 0;
+        let match;
+        
+        while ((match = regex.exec(node.nodeValue)) !== null) {
+            if (match.index > lastIndex) {
+                fragment.appendChild(document.createTextNode(node.nodeValue.substring(lastIndex, match.index)));
+            }
+            
+            const span = document.createElement('span');
+            span.className = 'highlight';
+            span.textContent = match[0];
+            fragment.appendChild(span);
+            
+            lastIndex = regex.lastIndex;
+        }
+        
+        if (lastIndex < node.nodeValue.length) {
+            fragment.appendChild(document.createTextNode(node.nodeValue.substring(lastIndex)));
+        }
+        
+        node.parentNode.replaceChild(fragment, node);
+    });
+}
+
+if (searchIcon && searchInput && searchResults) {
     searchIcon.addEventListener('click', (e) => {
         e.preventDefault();
         searchContainer.classList.toggle('active');
         if (searchContainer.classList.contains('active')) {
             searchInput.focus();
+        } else {
+            searchResults.classList.remove('show');
+            unhighlightAll();
         }
     });
 
-    // Close search when clicking outside
     document.addEventListener('click', (e) => {
         if (!searchContainer.contains(e.target)) {
             searchContainer.classList.remove('active');
+            searchResults.classList.remove('show');
         }
     });
 
-    // Allow Enter key to submit search
+    searchInput.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase().trim();
+        searchResults.innerHTML = '';
+        
+        unhighlightAll();
+        if (val && val.length > 1) {
+            const mainContent = document.querySelector('main.l-main');
+            if (mainContent) {
+                highlightText(mainContent, val);
+            }
+        }
+        
+        if (val) {
+            const matches = searchableKeywords.filter(k => k.term.toLowerCase().includes(val));
+            if (matches.length > 0) {
+                searchResults.classList.add('show');
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.className = 'search__result-item';
+                    
+                    const regex = new RegExp(`(${val})`, 'gi');
+                    div.innerHTML = match.term.replace(regex, '<span class="highlight">$1</span>');
+                    
+                    div.addEventListener('click', () => {
+                        unhighlightAll();
+                        const section = document.getElementById(match.target);
+                        if (section) {
+                            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            highlightText(section, match.term);
+                        }
+                        searchResults.classList.remove('show');
+                        searchContainer.classList.remove('active');
+                        searchInput.value = '';
+                    });
+                    
+                    searchResults.appendChild(div);
+                });
+            } else {
+                searchResults.classList.remove('show');
+            }
+        } else {
+            searchResults.classList.remove('show');
+        }
+    });
+
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            const query = searchInput.value;
-            if (query.trim()) {
-                console.log('Search for:', query);
-                // Add your search functionality here
+            const val = searchInput.value.toLowerCase().trim();
+            if (val) {
+                unhighlightAll();
+                highlightText(document.body, val);
+                searchResults.classList.remove('show');
+                searchContainer.classList.remove('active');
             }
         }
     });
 
-    // Close search on Escape key
     searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             searchContainer.classList.remove('active');
+            searchResults.classList.remove('show');
             searchInput.value = '';
+            unhighlightAll();
         }
     });
 }
@@ -170,5 +290,89 @@ if (bannerSlider) {
 
     banners.forEach((banner) => observer.observe(banner));
   }
+}
+
+/*===== CHATBOT LOGIC =====*/
+const chatbotBox = document.getElementById('chatbot-box');
+const chatbotInput = document.getElementById('chatbot-input');
+const chatbotSendBtn = document.getElementById('chatbot-send');
+const chatbotOptionBtns = document.querySelectorAll('.chatbot__option-btn');
+const chatbotToggle = document.getElementById('chatbot-toggle');
+const chatbotClose = document.getElementById('chatbot-close');
+const chatbotWrapper = document.getElementById('chatbot-wrapper');
+
+if (chatbotToggle && chatbotWrapper && chatbotClose) {
+  chatbotToggle.addEventListener('click', () => {
+    chatbotWrapper.classList.toggle('show');
+  });
+
+  chatbotClose.addEventListener('click', () => {
+    chatbotWrapper.classList.remove('show');
+  });
+}
+
+const botResponses = {
+  skills: "I specialize in Data Science, Web Development, HTML5, CSS3, JavaScript, Python, R, C++, and UI/UX Design.",
+  experience: "I have experience building clean portfolio websites, practical data applications, and intuitive user interfaces. Check out my Work section!",
+  hire: "You can hire me by filling out the contact form here or messaging me on LinkedIn.",
+  default: "Thanks for reaching out! I'm currently a virtual assistant, so please use the contact form above to get in touch with Ginindu directly."
+};
+
+function appendMessage(text, sender) {
+  if (!chatbotBox) return;
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('chatbot__message');
+  messageDiv.classList.add(sender === 'bot' ? 'chatbot__message--bot' : 'chatbot__message--user');
+  messageDiv.innerHTML = `<p>${text}</p>`;
+  chatbotBox.appendChild(messageDiv);
+  chatbotBox.scrollTop = chatbotBox.scrollHeight;
+}
+
+function handleChatbotInput(query) {
+  if (!query) return;
+  
+  appendMessage(query, 'user');
+  
+  setTimeout(() => {
+    appendMessage(botResponses.default, 'bot');
+  }, 600);
+}
+
+if (chatbotSendBtn && chatbotInput) {
+  chatbotSendBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const text = chatbotInput.value.trim();
+    if (text) {
+      handleChatbotInput(text);
+      chatbotInput.value = '';
+    }
+  });
+
+  chatbotInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const text = chatbotInput.value.trim();
+      if (text) {
+        handleChatbotInput(text);
+        chatbotInput.value = '';
+      }
+    }
+  });
+}
+
+if (chatbotOptionBtns) {
+  chatbotOptionBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const questionType = btn.getAttribute('data-question');
+      const questionText = btn.textContent;
+      
+      appendMessage(questionText, 'user');
+      
+      setTimeout(() => {
+        appendMessage(botResponses[questionType] || botResponses.default, 'bot');
+      }, 600);
+    });
+  });
 }
 
